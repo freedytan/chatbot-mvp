@@ -47,3 +47,19 @@ async def add_message_to_conversation(conversation_id: str, message: Message) ->
     await conversation.save()
 
     return llm_response
+
+# Read a conversation by ID
+async def read_conversation(conversation_id: str) -> Conversation:
+    conversation = await Conversation.get(ObjectId(conversation_id))
+    if not conversation:
+        raise HTTPException(status_code=404, detail="Conversation not found")
+    return conversation
+
+# Delete a conversation by ID
+async def delete_conversation(conversation_id: str):
+    conversation = await Conversation.get(ObjectId(conversation_id))
+    if not conversation:
+        raise HTTPException(status_code=404, detail="Conversation not found")
+    
+    await conversation.delete()
+    return {"message": "Conversation deleted successfully"}

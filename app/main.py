@@ -30,6 +30,18 @@ async def add_message(conversation_id: str, message: Message):
     updated_conversation = await crud.add_message_to_conversation(conversation_id, message)
     return updated_conversation
 
+# Route to read a conversation by ID
+@app.get("/conversations/{conversation_id}/", response_description="Get conversation by ID")
+async def read_conversation(conversation_id: str):
+    conversation = await crud.read_conversation(conversation_id)
+    return conversation
+
+# Route to delete a conversation by ID
+@app.delete("/conversations/{conversation_id}/", response_description="Conversation deleted")
+async def delete_conversation(conversation_id: str):
+    result = await crud.delete_conversation(conversation_id)
+    return result
+
 # Run the server using Uvicorn
 if __name__ == "__main__":
     uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
