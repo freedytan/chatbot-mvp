@@ -2,6 +2,8 @@ Hi everyone👋! I am Freedy and welcome to my first personal project in GitHub 
 
 # Chatbot-MVP
 
+![Example Image](images/workflow.jpeg)
+
 Chatbot-MVP is a minimal viable product (MVP) application built using FastAPI, Beanie and MongoDB - designed to integrate with a Large Language Model (LLM) for generating responses based on user input. The application supports CRUD operations, anonymization of sensitive data, and is containerized using Docker for easy deployment.
 
 ## Table of Contents
