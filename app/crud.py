@@ -2,18 +2,23 @@
 
 from app.models import Conversation, Message
 from app.llm_service import llm_generate
+from app.anonymizer import anonymize_text
 from bson import ObjectId
 from fastapi import HTTPException
 
 async def create_conversation_with_message(message: Message) -> Conversation:
+    # Anonymize only the content of the user's message
+    message.content = anonymize_text(message.content)
+
     # Create a new conversation with the initial user message
     conversation = Conversation(
         title="New Conversation",  
-        messages=[message]
+        messages=[message] #Anonymize
     )
     
     # Generate the LLM response based on the initial user message
     llm_response_content = llm_generate(message.content)
+    llm_response_content = anonymize_text(llm_response_content) # Anonymize
     llm_response = Message(role="Chatbot", content=llm_response_content)
     
     # Append the LLM's response to the messages list
