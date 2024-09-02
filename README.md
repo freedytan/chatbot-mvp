@@ -64,7 +64,7 @@ CHATBOT-MVP/
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/chatbot-mvp.git
+git clone https://github.com/freedytan/chatbot-mvp
 cd chatbot-mvp
 ```
 
