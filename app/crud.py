@@ -25,6 +25,7 @@ async def create_conversation_with_message(message: Message) -> Conversation:
     return conversation
 
 async def add_message_to_conversation(conversation_id: str, message: Message) -> Conversation:
+    # Retrieve the conversation by ID
     conversation = await Conversation.get(ObjectId(conversation_id))
     if not conversation:
         raise HTTPException(status_code=404, detail="Conversation not found")
@@ -32,8 +33,11 @@ async def add_message_to_conversation(conversation_id: str, message: Message) ->
     # Append the new user message to the messages list
     conversation.messages.append(message)
     
-    # Generate the LLM response based on the user's message
-    llm_response_content = llm_generate(message.content)
+    # Generate the full chat history as a string
+    chat_history = "\n".join([f"{msg.role}: {msg.content}" for msg in conversation.messages])
+    
+    # Generate the LLM response based on the entire conversation history
+    llm_response_content = llm_generate(chat_history)
     llm_response = Message(role="Chatbot", content=llm_response_content)
     
     # Append the LLM's response to the messages list
@@ -41,5 +45,5 @@ async def add_message_to_conversation(conversation_id: str, message: Message) ->
     
     # Save the updated conversation back to the database
     await conversation.save()
-    
-    return conversation
+
+    return llm_response
