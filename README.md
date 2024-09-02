@@ -93,7 +93,7 @@ This will start the application on http://127.0.0.1:8000/.
 
 ## Docker usage
 
-###Build the Docker image
+### Build the Docker image
 ```bash
 docker build -t chatbot-mvp .
 ```
