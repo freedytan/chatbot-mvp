@@ -1,3 +1,5 @@
+# app/main.py
+
 from app import crud, schemas, database
 from app.database import init_db
 from app.models import Conversation, Message
@@ -14,7 +16,7 @@ async def start_db():
 
 @app.get("/")
 async def read_root():
-    return {"message": "Welcome to my Beanie-powered Chatbot API!"}
+    return {"message": "Welcome to the Beanie-powered Chatbot API!"}
 
 # Route to create a new conversation with the first message
 @app.post("/conversations/", response_description="Conversation created")

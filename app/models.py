@@ -1,3 +1,5 @@
+# app/models.py
+
 from beanie import Document
 from pydantic import Field, BaseModel
 from typing import List, Optional
